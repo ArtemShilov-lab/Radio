@@ -116,4 +116,84 @@ public class RadioTest {
 
         assertEquals(0, radio.getCurrentVolume());
     }
+    @Test
+    void shouldSet10StationsByDefault() {
+        Radio radio = new Radio();
+
+        radio.setCurrentStation(9);
+
+        assertEquals(9, radio.getCurrentStation());
+
+        radio.next();
+
+        assertEquals(0, radio.getCurrentStation());
+    }
+    @Test
+    void shouldSet5Stations() {
+        Radio radio = new Radio(5);
+
+        radio.setCurrentStation(4);
+
+        assertEquals(4, radio.getCurrentStation());
+
+        radio.next();
+
+        assertEquals(0, radio.getCurrentStation());
+    }
+    @Test
+    void shouldSwitchFromFirstStationToLastForFiveStations() {
+        Radio radio = new Radio(5);
+
+        radio.setCurrentStation(0);
+
+        radio.prev();
+
+        assertEquals(4, radio.getCurrentStation());
+    }
+    @Test
+    void shouldSwitchFromLastStationToFirstFor20Stations() {
+        Radio radio = new Radio(20);
+
+        radio.setCurrentStation(19);
+
+        assertEquals(19, radio.getCurrentStation());
+
+        radio.next();
+
+        assertEquals(0, radio.getCurrentStation());
+    }
+    @Test
+    void shouldSwitchFromFirstStationToLastFor20Stations() {
+        Radio radio = new Radio(20);
+
+        radio.setCurrentStation(0);
+
+        radio.prev();
+
+        assertEquals(19, radio.getCurrentStation());
+    }
+    @Test
+    void shouldNotSetStationEqualToStationsCount() {
+        Radio radio = new Radio(5);
+
+        radio.setCurrentStation(5);
+
+        assertEquals(0, radio.getCurrentStation());
+    }
+    @Test
+    void shouldNotSetNegativeStationForFiveStations() {
+        Radio radio = new Radio(5);
+
+        radio.setCurrentStation(-1);
+
+        assertEquals(0, radio.getCurrentStation());
+    }
+    @Test
+    void shouldNotSetStationEqualToStationsCountFor20Stations() {
+        Radio radio = new Radio(20);
+
+        radio.setCurrentStation(20);
+
+        assertEquals(0, radio.getCurrentStation());
+    }
 }
